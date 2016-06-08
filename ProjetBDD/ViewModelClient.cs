@@ -57,7 +57,9 @@ namespace ProjetBDD
 				sql.Select("* FROM client", out dt);
 				foreach (DataRow dr in dt.Rows)
 				{
-					Clients.Add(new Client(dr));
+					Client client = new Client(dr);
+					client.UpdateView += activate;
+					Clients.Add(client);
 				}
 			}
 		}
@@ -70,8 +72,8 @@ namespace ProjetBDD
 
 		private void client_newClient(object param)
 		{
-			SqlConnector sql = SqlConnector.Instance();
-			Client client = sql.CreateClient();
+			Client client = new Client();
+			client.UpdateView += activate;
 			Clients.Add(client);
 			MySelectedItem = client;
 		}

@@ -69,7 +69,7 @@ namespace ProjetBDD
 		private void newCommand(object param)
 		{
 			SqlConnector sql = SqlConnector.Instance();
-			Command cmd = sql.CreateCommand();
+			Command cmd = new Command();
 			Commands.Add(cmd);
 			MySelectedItem = cmd;
 		}

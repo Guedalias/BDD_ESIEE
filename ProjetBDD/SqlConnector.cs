@@ -70,6 +70,30 @@ namespace ProjetBDD
 			return false;
 		}
 
+		private string objectTabToString(object[] data)
+		{
+			string str_data = "";
+			foreach (object it in data)
+			{
+				str_data += it + ",";
+			}
+			return str_data;
+		}
+
+		public void Insert(string target, object[] data)
+		{
+			string str_data = objectTabToString(data);
+			string query = "Insert into " + target + " values(" + str_data.Substring(0, str_data.Length -1) + ");";
+			ExecQuery(query);
+		}
+
+		public void Update(string target, int id, string idName, object[] data)
+		{
+			string str_data = objectTabToString(data);
+			string query = "Update " + target + " Set " + str_data.Substring(0, str_data.Length - 1) + " where " + idName + "=" + id + ";";
+			ExecQuery(query);
+		}
+
 		public void Select(string query, out DataTable dt)
 		{
 			string				select = "SELECT " + query;
@@ -97,24 +121,28 @@ namespace ProjetBDD
 					table.Columns.Add(columnName, type);
 				}
 			}
-
 			table.Load(reader);
 		}
 
-		public Client CreateClient()
+		public void CreateClient(Client c)
 		{
-			Client res = new Client();
-
-			// push to db, get Default value
-			return res;
+			Insert("client", c.toSqlTab());
 		}
 
-		public Command CreateCommand()
+		public void updateClient(Client c)
 		{
-			Command res = new Command();
+			Update("client", c.ID, "ID_Cli", c.toSqlMap());
+		}
 
+		public void CreateCommand(Command c)
+		{
+			//ExecQuery("");
 			// push to db, get Default value
-			return res;
+		}
+
+		public void updateCommand(Command c)
+		{
+			//ExecQuery("");
 		}
 
 		public ConnectionState GetConnectionState()

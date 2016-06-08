@@ -67,6 +67,7 @@
 						<RowDefinition Height="32px"></RowDefinition>
 						<RowDefinition Height="32px"></RowDefinition>
 						<RowDefinition Height="32px"></RowDefinition>
+						<RowDefinition Height="32px"></RowDefinition>
 					</Grid.RowDefinitions>
 					<Label Grid.Column="0" Grid.Row="0" Content="ID"></Label>
 					<TextBox Grid.Column="1" Grid.Row="0"
@@ -83,6 +84,13 @@
 					<Label Grid.Column="0" Grid.Row="4" Content="Contenu"></Label>
 					<TextBox Grid.Column="1" Grid.Row="4"
 							 Text="{Binding Content}"></TextBox>
+					<Button x:Name="button" Content="Apply" Grid.Column="1" Grid.Row="5">
+						<i:Interaction.Triggers>
+							<i:EventTrigger EventName="Click">
+								<i:InvokeCommandAction Command="{Binding ApplyChanges}"/>
+							</i:EventTrigger>
+						</i:Interaction.Triggers>
+					</Button>
 				</Grid>
 			</Grid>
 		</DataTemplate>
@@ -123,6 +131,7 @@
 						<RowDefinition Height="32px"></RowDefinition>
 						<RowDefinition Height="32px"></RowDefinition>
 						<RowDefinition Height="32px"></RowDefinition>
+						<RowDefinition Height="32px"></RowDefinition>
 					</Grid.RowDefinitions>
 					<Label Grid.Column="0" Grid.Row="0" Content="Nom"></Label>
 					<TextBox Grid.Column="1" Grid.Row="0"
@@ -136,6 +145,13 @@
 					<Label Grid.Column="0" Grid.Row="3" Content="Points de fidélité"></Label>
 					<TextBox Grid.Column="1" Grid.Row="3"
 							 Text="{Binding Points}"></TextBox>
+					<Button x:Name="button" Content="Apply" Grid.Column="1" Grid.Row="4">
+						<i:Interaction.Triggers>
+							<i:EventTrigger EventName="Click">
+								<i:InvokeCommandAction Command="{Binding ApplyChanges}"/>
+							</i:EventTrigger>
+						</i:Interaction.Triggers>
+					</Button>
 				</Grid>
 			</Grid>
 		</DataTemplate>
