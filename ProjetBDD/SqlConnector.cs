@@ -80,10 +80,10 @@ namespace ProjetBDD
 			return str_data;
 		}
 
-		public void Insert(string target, object[] data)
+		public void Insert(string target, object[] data, string column)
 		{
 			string str_data = objectTabToString(data);
-			string query = "Insert into " + target + " values(" + str_data.Substring(0, str_data.Length -1) + ");";
+			string query = "Insert into " + target + "(" + column + ") values(" + str_data.Substring(0, str_data.Length -1) + ");";
 			ExecQuery(query);
 		}
 
@@ -126,7 +126,7 @@ namespace ProjetBDD
 
 		public void CreateClient(Client c)
 		{
-			Insert("client", c.toSqlTab());
+			Insert("client", c.toSqlTab(), c.getColumnNames());
 		}
 
 		public void updateClient(Client c)
@@ -136,13 +136,12 @@ namespace ProjetBDD
 
 		public void CreateCommand(Command c)
 		{
-			//ExecQuery("");
-			// push to db, get Default value
+			Insert("commande", c.toSqlTab(), c.getColumnNames());
 		}
 
 		public void updateCommand(Command c)
 		{
-			//ExecQuery("");
+			Update("commande", c.ID, "ID_Com", c.toSqlMap());
 		}
 
 		public ConnectionState GetConnectionState()

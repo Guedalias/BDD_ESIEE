@@ -55,11 +55,12 @@ namespace ProjetBDD
 				sql.Select("* FROM commande", out dt);
 				foreach (DataRow dr in dt.Rows)
 				{
-					Commands.Add(new Command(dr));
+					Command cmd = new Command(dr);
+					cmd.UpdateView += activate;
+					Commands.Add(cmd);
 				}
 			}
 		}
-
 
 		private void commands_SelectionChanged(object param)
 		{
@@ -70,6 +71,7 @@ namespace ProjetBDD
 		{
 			SqlConnector sql = SqlConnector.Instance();
 			Command cmd = new Command();
+			cmd.UpdateView += activate;
 			Commands.Add(cmd);
 			MySelectedItem = cmd;
 		}

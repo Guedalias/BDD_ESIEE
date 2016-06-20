@@ -10,6 +10,7 @@
 		xmlns:local="clr-namespace:ProjetBDD"
         Title="Pizza">
 	<Window.Resources>
+		<BooleanToVisibilityConverter x:Key="boolToVis" />
 		<DataTemplate DataType="{x:Type  local:ViewModelTable}">
 			<Grid>
 				<Grid.ColumnDefinitions>
@@ -68,26 +69,62 @@
 						<RowDefinition Height="32px"></RowDefinition>
 						<RowDefinition Height="32px"></RowDefinition>
 						<RowDefinition Height="32px"></RowDefinition>
+						<RowDefinition Height="32px"></RowDefinition>
+						<RowDefinition Height="32px"></RowDefinition>
+						<RowDefinition Height="32px"></RowDefinition>
+						<RowDefinition Height="32px"></RowDefinition>
+						<RowDefinition Height="32px"></RowDefinition>
 					</Grid.RowDefinitions>
 					<Label Grid.Column="0" Grid.Row="0" Content="ID"></Label>
-					<TextBox Grid.Column="1" Grid.Row="0"
-							 Text="{Binding ID}"></TextBox>
+					<Label Grid.Column="1" Grid.Row="0"
+							 Content="{Binding ID}"></Label>
 					<Label Grid.Column="0" Grid.Row="1" Content="Date Commande"></Label>
 					<TextBox Grid.Column="1" Grid.Row="1"
 							 Text="{Binding DateCmd}"></TextBox>
 					<Label Grid.Column="0" Grid.Row="2" Content="Date Livraison"></Label>
-					<TextBox Grid.Column="1" Grid.Row="2"
+					<TextBox Grid.Column="1" Grid.Row="2" Visibility="{Binding Visible, Converter={StaticResource boolToVis}}"
 							 Text="{Binding DateLivr}"></TextBox>
 					<Label Grid.Column="0" Grid.Row="3" Content="Prix"></Label>
-					<TextBox Grid.Column="1" Grid.Row="3"
-							 Text="{Binding Price}"></TextBox>
-					<Label Grid.Column="0" Grid.Row="4" Content="Contenu"></Label>
-					<TextBox Grid.Column="1" Grid.Row="4"
-							 Text="{Binding Content}"></TextBox>
-					<Button x:Name="button" Content="Apply" Grid.Column="1" Grid.Row="5">
+					<Label Grid.Column="1" Grid.Row="3"
+							 Content="{Binding Price}"></Label>
+					<Label Grid.Column="0" Grid.Row="4" Content="Pizza"></Label>
+					<Label Grid.Column="1" Grid.Row="4" Content="{Binding selectedPizza}" Visibility="{Binding Visible, Converter={StaticResource boolToVis}}"></Label>
+					<ComboBox Grid.Column="1" Grid.Row="4" ItemsSource="{Binding Pizza}" SelectedItem="{Binding selectedPizza}" Visibility="{Binding ApplyVisible, Converter={StaticResource boolToVis}}">
+						<i:Interaction.Triggers>
+							<i:EventTrigger EventName="SelectionChanged">
+								<i:InvokeCommandAction Command="{Binding pizzaChangedCMD}"/>
+							</i:EventTrigger>
+						</i:Interaction.Triggers>
+					</ComboBox>
+					<Label Grid.Column="0" Grid.Row="5" Content="Taille"></Label>
+					<Label Grid.Column="1" Grid.Row="5" Content="{Binding selectedTaille}" Visibility="{Binding Visible, Converter={StaticResource boolToVis}}"></Label>
+					<ComboBox Grid.Column="1" Grid.Row="5" ItemsSource="{Binding TaillePizza}" SelectedItem="{Binding selectedTaille}" Visibility="{Binding ApplyVisible, Converter={StaticResource boolToVis}}">
+						<i:Interaction.Triggers>
+							<i:EventTrigger EventName="SelectionChanged">
+								<i:InvokeCommandAction Command="{Binding pizzaChangedCMD}"/>
+							</i:EventTrigger>
+						</i:Interaction.Triggers>
+					</ComboBox>
+					<Label Grid.Column="0" Grid.Row="6" Content="Vehicule"></Label>
+					<Label Grid.Column="1" Grid.Row="6" Content="{Binding selectedVehicule}" Visibility="{Binding Visible, Converter={StaticResource boolToVis}}"></Label>
+					<ComboBox Grid.Column="1" Grid.Row="6" ItemsSource="{Binding Vehicule}" SelectedItem="{Binding selectedVehicule}" Visibility="{Binding ApplyVisible, Converter={StaticResource boolToVis}}"></ComboBox>
+					<Label Grid.Column="0" Grid.Row="7" Content="Livreur"></Label>
+					<Label Grid.Column="1" Grid.Row="7" Content="{Binding selectedLivreur}" Visibility="{Binding Visible, Converter={StaticResource boolToVis}}"></Label>
+					<ComboBox Grid.Column="1" Grid.Row="7" ItemsSource="{Binding Livreur}" SelectedItem="{Binding selectedLivreur}" Visibility="{Binding ApplyVisible, Converter={StaticResource boolToVis}}"></ComboBox>
+					<Label Grid.Column="0" Grid.Row="8" Content="Client"></Label>
+					<Label Grid.Column="1" Grid.Row="8" Content="{Binding selectedClient}" Visibility="{Binding Visible, Converter={StaticResource boolToVis}}"></Label>
+					<ComboBox Grid.Column="1" Grid.Row="8" ItemsSource="{Binding Client}" SelectedItem="{Binding selectedClient}" Visibility="{Binding ApplyVisible, Converter={StaticResource boolToVis}}"></ComboBox>
+					<Button x:Name="button" Content="Apply" Grid.Column="1" Grid.Row="9"  Visibility="{Binding ApplyVisible, Converter={StaticResource boolToVis}}">
 						<i:Interaction.Triggers>
 							<i:EventTrigger EventName="Click">
 								<i:InvokeCommandAction Command="{Binding ApplyChanges}"/>
+							</i:EventTrigger>
+						</i:Interaction.Triggers>
+					</Button>
+					<Button Content="Close" Grid.Column="1" Grid.Row="9"  Visibility="{Binding Visible, Converter={StaticResource boolToVis}}">
+						<i:Interaction.Triggers>
+							<i:EventTrigger EventName="Click">
+								<i:InvokeCommandAction Command="{Binding CloseCMD}"/>
 							</i:EventTrigger>
 						</i:Interaction.Triggers>
 					</Button>

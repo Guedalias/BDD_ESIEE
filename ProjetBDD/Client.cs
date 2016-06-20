@@ -35,12 +35,11 @@ namespace ProjetBDD
 
 		public object[] toSqlTab()
 		{
-			object[] res = new object[5];
-			res[0] = ID;
-			res[1] = "'" + Name + "'";
-			res[2] = "'" + Surname + "'";
-			res[3] = Solde as object;
-			res[4] = Points as object;
+			object[] res = new object[4];
+			res[0] = "'" + Name + "'";
+			res[1] = "'" + Surname + "'";
+			res[2] = Solde as object;
+			res[3] = Points as object;
 			return res;
 		}
 
@@ -52,6 +51,11 @@ namespace ProjetBDD
 			res[2] = "Solde_Cli=" + Solde as object;
 			res[3] = "PointsFidel_Cli=" + Points as object;
 			return res;
+		}
+
+		public string getColumnNames()
+		{
+			return "Nom_Cli, Prenom_Cli, Solde_Cli, PointsFidel_Cli";
 		}
 
 		public override string ToString()
